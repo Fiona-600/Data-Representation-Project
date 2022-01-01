@@ -1,5 +1,7 @@
 import mysql.connector
 from mysql.connector import cursor
+#from .models import ConfigFile
+#import dbconfig as cfg
 
 class ClassesDao:
     db = ""
@@ -26,7 +28,7 @@ class ClassesDao:
         
         cursor.execute(sql, values)
         self.db.commit()
-        print("create:")
+        #print("create:")
         return cursor.lastrowid
 
     def getAll(self):
@@ -74,6 +76,7 @@ class ClassesDao:
        sql = "DELETE FROM Classes WHERE ID = %s"
        values = [ID]
        cursor.execute(sql, values)
+       self.db.commit()
        return {}
 
 
