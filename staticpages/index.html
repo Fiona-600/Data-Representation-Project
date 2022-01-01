@@ -1,0 +1,250 @@
+<html>
+    <head>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    </head>
+    <body>
+        <div id="create-update" style="display:none">
+            <h2>create-edit</h2>
+            <table id="createUpdateForm">
+                <tr>
+                    <td>CLASS ID</td>
+                    <td><input type="text" name="Class_ID" id="idInput"></td>
+                </tr>
+                <tr>
+                    <td>CLASS NAME</td>
+                    <td><input type="text" name="Class_Name"></td>
+                </tr>
+                <tr>
+                    <td>DAY</td>
+                    <td><input type="text" name="Day"></td>
+                </tr>
+                <tr>    
+                    <td>CLASS TIME</td>
+                    <td><input type="text" name="Time"></td>
+                </tr>
+                <tr>    
+                    <td>MAXIMUM PARTICIPANTS</td>
+                    <td><input type="int" name="Max_Particpants"></td>
+                </tr>
+                <tr>    
+                    <td>TRAINER</td>
+                    <td><input type="text" name="Trainer"></td>
+                </tr>
+
+
+                <tr>
+                    <td></td><td>
+                        <button id="create-button" onclick="doCreate()">Create</button>     
+                        <button id="update-button" onclick="doUpdate()">update</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="display">
+            <h2>Classes</h2>
+            <button onClick="showCreate()">Create</button>
+            <table id="ClassTable" class="table">
+                <tr>
+                    <th>CLASS ID</th><th>CLASS NAME</th><th>DAY</th><th>TIME</th><th>MAXIMUM PARTICIPANTS</th><th>TRAINER</th>
+                </tr>
+                
+            </table>
+
+        </div>
+
+        <script>
+            function showCreate(){
+                document.getElementById('display').style.display = "none"
+                document.getElementById('update-button').style.display = "none"
+                document.getElementById('create-button').style.display = "block"
+                document.getElementById('create-update').style.display = "block"
+
+            }
+            function showUpdate(thisElem){
+                var rowElement = thisElem.parentNode.parentNode;
+                Classes = readClassesFromRow(rowElement)
+                populateForm(Classes)
+
+                document.getElementById('display').style.display = "none"
+                document.getElementById('update-button').style.display = "block"
+                document.getElementById('create-button').style.display = "none"
+                document.getElementById('create-update').style.display = "block"
+
+            }
+            function readClassFromRow(rowElement){
+                Classes = {}
+                Classes.Class_ID = rowElement.getAttribute("id");
+                Classes.Class_Name = rowElement.cells[1].firstChild.textContent
+                Classes.Day = rowElement.cells[2].firstChild.textContent
+                Classes.Time = rowElement.cells[3].firstChild.textContent
+                Classes.Max_Particpants = rowElement.cells[3].firstChild.textContent
+                Classes.Trainer = rowElement.cells[3].firstChild.textContent
+                return Classes
+                
+            }
+            function populateForm(Classes){
+                var form = document.getElementById('createUpdateForm')
+
+                
+                form.querySelector('input[name="Class_ID"]').value = Classes.Class_ID
+                form.querySelector('input[name="Class_ID"]').disabled=true
+                
+                form.querySelector('input[name="Class_Name"]').value = Classes.Class_Name
+                form.querySelector('input[name="Day"]').value = Classes.Day
+                form.querySelector('input[name="Time"]').value = Classes.Time 
+                form.querySelector('input[name="Max_Participants"]').value = Classes.Max_Participants
+                form.querySelector('input[name="Trainer"]').value = Classes.Trainer
+            }
+            function clearForm() {
+                    var form = document.getElementById('createUpdateForm')
+
+                    form.querySelector('input[name="Class_ID"]').value = ''
+                    form.querySelector('input[name="Class_ID"]').disabled = false
+
+                    form.querySelector('input[name="Class_Name"]').value = ''
+                    form.querySelector('input[name="Day"]').value = ''
+                    form.querySelector('input[name="Time"]').value = ''
+                    form.querySelector('input[name="Max_Participants"]').value = ''
+                    form.querySelector('input[name="Trainer"]').value = ''
+                }
+
+            function doCreate(){
+                console.log("in doCreate")
+                Classes= getClassesFromForm()
+                console.log(Classes)
+                $.ajax({
+                    url:"/Classes",
+                    data:JSON.stringify(Classes),
+                    method:"POST",
+                    dataType:"JSON",
+                    contentType: "application/json; charset=utf-8",
+                    success:function(result){
+                        console.log(result) 
+                        addClassesToTable(Classes)
+                        showDisplay()
+                        clearForm()
+                    },
+                    error:function(xhr,status,error){
+                        console.log("error"+error)
+                    }
+                })
+               
+            }
+            function doUpdate(){
+                Classes = getClassesFromForm()
+                updateServer(Classes)
+                
+            }
+            function updateServer(Classes){
+               $.ajax({
+                    url: "/Classes/"+Classes.Class_ID,
+                    data: JSON.stringify(Classes),
+                    method: "PUT",
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result) {
+                        console.log(result)
+                        updateTableRow(Classes)
+                        showDisplay()
+                        clearForm()
+
+                    },
+                    error: function (xhr, status, error) {
+                        console.log("error" + error)
+                    }
+                })
+            }
+            function doDelete(thisElem){
+                var tableElement = document.getElementById('ClassesTable');
+                var rowElement = thisElem.parentNode.parentNode;
+                var index = rowElement.rowIndex;
+                Class_ID = rowElement.getAttribute("id");
+                $.ajax({
+                    url:"/Classes/"+Class_ID,
+                    method:"DELETE",
+                    dateType:"JSON",
+                    success:function(result){
+                        tableElement.deleteRow(index);
+                    },
+                    error:function(xhr,status,error){
+                        console.log(error)
+                    }
+                })
+                
+            }
+            function updateTableRow(Classes){
+                rowElement = document.getElementById(Classes.Class_ID)
+                rowElement.cells[1].firstChild.textContent = Classes.Class_Name
+                rowElement.cells[2].firstChild.textContent = Classes.Day
+                rowElement.cells[3].firstChild.textContent = Classes.Time
+                rowElement.cells[3].firstChild.textContent = Classes.Max_Participants
+                rowElement.cells[3].firstChild.textContent = Classes.Trainer
+                //console.log("updating table")
+            }
+            function getClassesFromForm(){
+                var form = document.getElementById('createUpdateForm')
+
+                var Classes = {}
+                Classes.Class_ID = form.querySelector('input[name="Class_ID"]').value
+                Classes.Class_Name = form.querySelector('input[name="Class_Name"]').value
+                Classes.Day = form.querySelector('input[name="Day"]').value
+                Classes.Time = form.querySelector('input[name="Time"]').value
+                Classes.Max_Participants = form.querySelector('input[name="Max_Participants"]').value
+                Classes.Trainer = form.querySelector('input[name="Trainer"]').value
+                //console.log(Classes)
+                 return Classes
+            }
+             function showDisplay() {
+                    document.getElementById('display').style.display = "block"
+                    document.getElementById('create-update').style.display = "none"
+
+                }
+
+            function populateTable(){
+                //ajax getAll
+               $.ajax({
+                   url:'http://127.0.0.1:5000/Classes',
+                   method:'GET',
+                   datatype:'JSON',
+                   success:function(results){
+                        for (Classes of results){
+                             addClassesToTable(Classes)
+                        }
+                   },
+                   error:function (xhr,status,error){
+                       console.log ("error "+error +" code:"+status)
+                   }
+
+               })
+               
+            }
+            function addClassesToTable(Classes){
+                //console.log("working so far")
+                tableElem = document.getElementById("ClassesTable")
+                rowElem = tableElem.insertRow(-1)
+                rowElem.setAttribute("id", Classes.Class_ID)
+                cell1 = rowElem.insertCell(0)
+                cell1.innerHTML = Classes.Class_ID
+                cell2 = rowElem.insertCell(1)
+                cell2.innerHTML = Classes.Class_Name
+                cell3 = rowElem.insertCell(2)
+                cell3.innerHTML = Classes.Day
+                cell4 = rowElem.insertCell(3)
+                cell4.innerHTML = Classes.Time
+                cell5 = rowElem.insertCell(2)
+                cell5.innerHTML = Classes.Max_Participants
+                cell6 = rowElem.insertCell(3)
+                cell6.innerHTML = Classes.Trainer
+                cell7 = rowElem.insertCell(4)
+                cell7.innerHTML = '<button onclick="showUpdate(this)">Update</button>'
+                cell8 = rowElem.insertCell(5)
+                cell8.innerHTML = '<button onclick="doDelete(this)">delete</button>'
+                 }
+            populateTable()
+        </script>
+    </body>
+</html>

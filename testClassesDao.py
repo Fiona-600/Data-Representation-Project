@@ -1,7 +1,7 @@
 from ClassesDao import classesDao
 
 Class1 = {
-    "ID": "ABM1",
+    "Class_ID": "ABM1",
     "Class_Name": "Agility - Beginners",
     "Day": "Monday",
     "Time": "7pm",
@@ -10,7 +10,7 @@ Class1 = {
 }
 
 Class2 = {
-    "ID": "AIM1",
+    "Class_ID": "AIM1",
     "Class_Name": "Agility - Improvers",
     "Day": "Monday",
     "Time": "8pm",
@@ -19,7 +19,7 @@ Class2 = {
 }
 
 Class3 = {
-    "ID": "BOT1",
+    "Class_ID": "BOT1",
     "Class_Name": "Beginners - Obedience",
     "Day": "Tuesday",
     "Time": "7pm",
@@ -28,7 +28,7 @@ Class3 = {
 }
 
 Class4 = {
-    "ID": "BOT2",
+    "Class_ID": "BOT2",
     "Class_Name": "Beginners - Obedience",
     "Day": "Tuesday",
     "Time": "8pm",
@@ -37,7 +37,7 @@ Class4 = {
 }
 
 Class5 = {
-    "ID": "ACW1",
+    "Class_ID": "ACW1",
     "Class_Name": "Agility Club",
     "Day": "Wednesday",
     "Time": "7pm",
@@ -46,7 +46,7 @@ Class5 = {
 }
 
 Class6 = {
-    "ID": "IOT1",
+    "Class_ID": "IOT1",
     "Class_Name": "Improvers - Obedience",
     "Day": "Thursday",
     "Time": "7pm",
@@ -55,7 +55,7 @@ Class6 = {
 }
 
 Class7 = {
-    "ID": "IOT2",
+    "Class_ID": "IOT2",
     "Class_Name": "Improvers - Obedience",
     "Day": "Thursday",
     "Time": "7pm",
@@ -66,13 +66,13 @@ Class7 = {
 #returnValue = classesDao.create(Classes) #test - code for server.py
 returnValue = classesDao.getAll()
 print(returnValue)
-returnValue = classesDao.findById(Class7['ID'])
+returnValue = classesDao.findById(Class7['Class_ID'])
 print(returnValue)
 returnValue = classesDao.update(Class7)
 print(returnValue)
-returnValue = classesDao.findById(Class7['ID'])
+returnValue = classesDao.findById(Class7['Class_ID'])
 print(returnValue)
-returnValue = classesDao.delete(Class7['ID'])
+returnValue = classesDao.delete(Class7['Class_ID'])
 print(returnValue)
 returnValue = classesDao.getAll()
 print(returnValue)

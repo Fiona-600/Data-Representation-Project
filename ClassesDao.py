@@ -16,9 +16,9 @@ class ClassesDao:
 
     def create(self, Classes):
         cursor = self.db.cursor()
-        sql = "insert into Classes (ID, Class_Name, Day, Time, Max_Participants,Trainer) values (%s,%s,%s,%s,%s,%s)"
+        sql = "insert into Classes (Class_ID, Class_Name, Day, Time, Max_Participants,Trainer) values (%s,%s,%s,%s,%s,%s)"
         values = [
-            Classes["ID"],
+            Classes["Class_ID"],
             Classes["Class_Name"],
             Classes["Day"],
             Classes["Time"],
@@ -29,7 +29,7 @@ class ClassesDao:
         cursor.execute(sql, values)
         self.db.commit()
         #print("create:")
-        return cursor.lastrowid
+        #return cursor.lastrowid
 
     def getAll(self):
         cursor = self.db.cursor()
@@ -44,10 +44,10 @@ class ClassesDao:
 
         return returnArray
 
-    def findById(self, ID):
+    def findById(self, Class_ID):
         cursor = self.db.cursor()
-        sql = 'select * from Classes where ID = %s'
-        values = [ID]
+        sql = 'select * from Classes where Class_ID = %s'
+        values = [Class_ID]
         cursor.execute(sql, values)
         result = cursor.fetchone()
         #print("\nfindByID:")
@@ -56,14 +56,15 @@ class ClassesDao:
 
     def update(self, Classes):
         cursor = self.db.cursor()
-        sql = "UPDATE Classes SET Class_Name = %s, Day=%s, Time=%s, Max_participants=%s, Trainer=%s where ID = %s"
+        sql = "UPDATE Classes SET Class_Name = %s, Day=%s, Time=%s, Max_participants=%s, Trainer=%s where Class_ID = %s"
         values = [
+            #Classes['Class_ID'],
             Classes["Class_Name"],
             Classes["Day"],
             Classes["Time"],
             Classes["Max_Participants"],
             Classes["Trainer"],
-            Classes["ID"],
+            Classes["Class_ID"],
             ]
 
         cursor.execute(sql, values)
@@ -71,10 +72,10 @@ class ClassesDao:
         return Classes
 
 
-    def delete(self, ID):
+    def delete(self, Class_ID):
        cursor = self.db.cursor()
-       sql = "DELETE FROM Classes WHERE ID = %s"
-       values = [ID]
+       sql = "DELETE FROM Classes WHERE Class_ID = %s"
+       values = [Class_ID]
        cursor.execute(sql, values)
        self.db.commit()
        return {}
@@ -82,13 +83,14 @@ class ClassesDao:
 
 
     def convertToDict(self, result):
-        colnames = ["ID", "Class_Name", "Day", "Time", "Max_participants", "Trainer"]
+        colnames = ["Class_ID", "Class_Name", "Day", "Time", "Max_participants", "Trainer"]
         Classes = {}
 
         if result:
             for i , colName in enumerate(colnames):
                 value = result[i]
                 Classes[colName] = value
+        #self.db.commit()
         return Classes
 
 classesDao = ClassesDao()

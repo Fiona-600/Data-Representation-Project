@@ -17,7 +17,7 @@ cursor.execute("USE ClassTimetable")
 cursor.execute("DROP TABLE Classes")
 
 # Create the table if it doesn't exist
-cursor.execute("CREATE TABLE IF NOT EXISTS Classes(ID varchar(20) PRIMARY KEY,Class_Name varchar(100),Day varchar(10),Time varchar(10), Max_Participants int,Trainer varchar(50))")
+cursor.execute("CREATE TABLE IF NOT EXISTS Classes(Class_ID varchar(20) PRIMARY KEY,Class_Name varchar(100),Day varchar(10),Time varchar(10), Max_Participants int,Trainer varchar(50))")
 #cursor.execute("CREATE TABLE IF NOT EXISTS Classes(Class_Name varchar(100),Day varchar(10),Time varchar(10),Max_Participants int)")
 #cursor.execute("CREATE TABLE Classes(Class_Name varchar(100),Day varchar(10),Time varchar(10),Max_Participants int)")
 
@@ -43,7 +43,3 @@ cursor.executemany(sql,values)
 
 db.commit()
 
-
-# READ METHODS:
-#query = cursor.fetchall() 
-#print(tabulate (query, tablefmt='psql'))  
