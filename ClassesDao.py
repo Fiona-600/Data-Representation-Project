@@ -56,7 +56,7 @@ class ClassesDao:
 
     def update(self, Classes):
         cursor = self.db.cursor()
-        sql = "UPDATE Classes SET Class_Name = %s, Day=%s, Time=%s, Max_participants=%s, Trainer=%s where Class_ID = %s"
+        sql = "UPDATE Classes SET Class_Name = %s, Day=%s, Time=%s, Max_Participants=%s, Trainer=%s where Class_ID = %s"
         values = [
             #Classes['Class_ID'],
             Classes["Class_Name"],
@@ -83,7 +83,7 @@ class ClassesDao:
 
 
     def convertToDict(self, result):
-        colnames = ["Class_ID", "Class_Name", "Day", "Time", "Max_participants", "Trainer"]
+        colnames = ["Class_ID", "Class_Name", "Day", "Time", "Max_Participants", "Trainer"]
         Classes = {}
 
         if result:
