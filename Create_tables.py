@@ -27,7 +27,7 @@ cursor.execute("CREATE TABLE IF NOT EXISTS Classes(Class_ID varchar(20) PRIMARY 
 #Add a New Class:
 sql = "INSERT INTO Classes values(%s,%s,%s,%s,%s,%s)"
 #values = ("Agility - Beginners", "Monday","7pm","10"), ("Agility - Improvers", "Monday","8pm","10"), ("Beginners - Obedience", "Tuesday","8pm","10"), ("Agility Club", "Wednesday","7pm","10"), ("Improvers - Obedience", "Thursday","7pm","10")
-values = ("ABM1","Agility - Beginners", "Monday","7pm",10,"Ciara"), ("AIM1","Agility - Improvers", "Monday","8pm",10,"Jane"), ("BOT1","Beginners - Obedience", "Tuesday","7pm",10,"Joe"), ("BOT2","Beginners - Obedience", "Tuesday","8pm",10,"Joe"), ("ACW1","Agility Club", "Wednesday","7pm",10,"Jane"), ("IOT1","Improvers - Obedience", "Thursday","7pm",10,"Dave"), ("IOT2","Improvers - Obedience", "Thursday","8pm",10,"Dave")
+values = ("ABM1","Agility - Beginners", "Monday","7pm",10,"Ciara"), ("AIM1","Agility - Improvers", "Monday","8pm",10,"Jane"), ("BOTU1","Beginners - Obedience", "Tuesday","7pm",10,"Joe"), ("BOTU2","Beginners - Obedience", "Tuesday","8pm",10,"Joe"), ("ACW1","Agility Club", "Wednesday","7pm",10,"Jane"), ("IOTH1","Improvers - Obedience", "Thursday","7pm",10,"Dave"), ("IOTH2","Improvers - Obedience", "Thursday","8pm",10,"Dave")
 
 cursor.executemany(sql,values)
 

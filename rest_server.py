@@ -47,7 +47,7 @@ def getAll():
     #return jsonify(results)
     #return jsonify({})   
 
-#curl "http://127.0.0.1:5000/Classes/ACW1" - Doesn't Work
+#curl "http://127.0.0.1:5000/Classes/ACW1" - working
 @app.route('/Classes/<Class_ID>')
 def findById(Class_ID):
     return jsonify(classesDao.findById(Class_ID))
@@ -57,8 +57,9 @@ def findById(Class_ID):
 
 # create
 # curl -X POST -d "{\"Class_ID\":\"BOFI\",\"Class_Name\":\"Beginners-Obedience\",\"Day\":\"Friday\", \"Time\":\"6pm\", \"Max_Participants\":10, \"Trainer\":\"Orla\"}" -H Content-Type:application/json http://127.0.0.1:5000/Classes
-# curl  -i -H "Content-Type:application/json" -X POST "{\"Class_ID\":\"BOF1\", \"Class_Name\":\"Beginners-Obedience\",\"Day\":\"Friday\", \"Time\":\"6pm\", \"Trainer\":\"Orla\"}" http://127.0.0.1:5000/Classes
-
+# curl  -i -H "Content-Type:application/json" -X POST "{\"Class_ID\":\"BOF1\", \"Class_Name\":\"Beginners-Obedience\",\"Day\":\"Friday\", \"Time\":\"6pm\", \"Max_Participants\":10, \"Trainer\":\"Orla\"}" http://127.0.0.1:5000/Classes
+# curl -i -H 'Content-Type:application/json' -X Post-d '{"Class_ID":"BOF1", "Class_Name":"Beginners-Obedience","Day":"Friday", "Time":"6pm", "Max_Participants":"10", "Trainer":"Orla"}' http://127.0.0.1:5000/Classes
+# curl -X POST -H 'Content-Type:application/json' http://127.0.0.1:5000/Classes -d '{"Class_ID":"BOF1", "Class_Name":"Beginners-Obedience","Day":"Friday", "Time":"6pm", "Max_Participants":"10", "Trainer":"Orla"}'
 
 @app.route('/Classes', methods=['POST'])
 def create():
