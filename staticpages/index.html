@@ -93,7 +93,7 @@
                 <td></td><td>
                     <button style = "padding: 10px 0px 10px; margin:5%; width:40%" id="create-button" onclick="doCreate()">Create a Class</button>     
                     <button style = "padding: 10px 10px 10px; margin:2%; width:45%" id="update-button" onclick="doUpdate()">Update an Existing Class</button>
-                    <!--<button id="booking-button" onclick="doBooking()">Make **a Booking</button>-->
+                    <!--<button id="booking-button" onclick="doBooking()">Make a Booking</button>--> <!--Note I did not have time to complete the functionality for this function-->
                 </td>
             </tr>
         </table>
@@ -201,7 +201,6 @@
                     contentType: "application/json; charset=utf-8",
                     success: function (result) {
                         console.log("yes")
-                        //console.log(result)
                         updateTableRow(Classes)
                         showDisplay()
                         clearForm()
@@ -262,8 +261,7 @@
                 }
 
             function populateTable(){
-                //ajax getAll
-               $.ajax({
+                $.ajax({
                    url:'http://127.0.0.1:5000/Classes',
                    method:'GET',
                    datatype:'JSON',
@@ -280,7 +278,6 @@
                
             }
             function addClassesToTable(Classes){
-                //console.log("working so far")
                 tableElem = document.getElementById("ClassTable")
                 
                 rowElem = tableElem.insertRow(-1)

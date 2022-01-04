@@ -31,7 +31,6 @@ class BookingDao:
         cursor.execute(sql)
         results = cursor.fetchall()
         returnArray = []
-        #print(results)
         for result in results:
             resultAsDict = self.convertToDict(result)
             returnArray.append(resultAsDict)
@@ -44,7 +43,6 @@ class BookingDao:
         values = [Dog_Name]
         cursor.execute(sql, values)
         result = cursor.fetchone()
-        #print("\nfindByID:")
         return self.convertToDict(result)
         
 

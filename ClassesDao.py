@@ -1,7 +1,5 @@
 import mysql.connector
 from mysql.connector import cursor
-#from .models import ConfigFile
-#import dbconfig as cfg
 
 class ClassesDao:
     db = ""
@@ -12,7 +10,6 @@ class ClassesDao:
             password = 'root',
             database ='classtimetable'
         )
-        #print ("connection made")
 
     def create(self, Classes):
         cursor = self.db.cursor()
@@ -28,8 +25,6 @@ class ClassesDao:
         
         cursor.execute(sql, values)
         self.db.commit()
-        #print("create:")
-        #return cursor.lastrowid
 
     def getAll(self):
         cursor = self.db.cursor()
@@ -37,7 +32,6 @@ class ClassesDao:
         cursor.execute(sql)
         results = cursor.fetchall()
         returnArray = []
-        #print(results)
         for result in results:
             resultAsDict = self.convertToDict(result)
             returnArray.append(resultAsDict)
@@ -50,7 +44,6 @@ class ClassesDao:
         values = [Class_ID]
         cursor.execute(sql, values)
         result = cursor.fetchone()
-        #print("\nfindByID:")
         return self.convertToDict(result)
         
 
@@ -58,7 +51,6 @@ class ClassesDao:
         cursor = self.db.cursor()
         sql = "UPDATE Classes SET Class_Name = %s, Day=%s, Time=%s, Max_Participants=%s, Trainer=%s where Class_ID = %s"
         values = [
-            #Classes['Class_ID'],
             Classes["Class_Name"],
             Classes["Day"],
             Classes["Time"],
@@ -90,7 +82,6 @@ class ClassesDao:
             for i , colName in enumerate(colnames):
                 value = result[i]
                 Classes[colName] = value
-        #self.db.commit()
         return Classes
 
 classesDao = ClassesDao()

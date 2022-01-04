@@ -60,12 +60,15 @@ The 'Classes' table contains the following information:
 <br/>
 <br/>
 
-The 'Bookings' table contains the following information:
+The 'Booking' table contains the following information:
 <br/>
+- Dog_Name
 - Class_ID: As above
 - Class_Name: As above
-- Dog_Name
-- Breed
+- Day
+- Time
+
+It had been my intention to develop the booking table further however time dictated that I completed it to restserver stage and not fully to the web page stage.
 
 <br/>
 
@@ -82,7 +85,7 @@ The GITHUB repository contains:
 
 • A *‘gitignore’* file containing any files or file types which should be ignored by the github repository.
 
-• A *'ClassesDAO.py'* file which defines the access to and operations on the data in the data source i.e. the database (data access object),
+• *'ClassesDAO.py'* and 'BookingDAO.py'* files which defines the access to and operations on the data in the data source i.e. the database (data access object).
 
 • A *'configuration.py'* file which holds the login information to the database.
 
@@ -95,20 +98,20 @@ The GITHUB repository contains:
 • A *‘README.md’* file which contains:
 
   1.	The purpose of the project 
-  2.    Information about the database and tables
+  2.  Information about the database and tables
   3.	Structure and project navigation
   4.	Required programs
-  5.    Installing the requirements.txt file
-  6.    Activating a virtual environment
+  5.  Installing the requirements.txt file
+  6.  Activating a virtual environment
   7.	Details of how to download and run the code 
   8.	Authors and contributors
   9.	References
 
 • A *‘requirements.txt’* file containing information that facilitates the user to quickly run the notebooks with minimal configuration
 
-• A *‘rest_server.py’* file which sets up the live web user interface to the database using a Flask server application.
+• ‘rest_server.py’* files which sets up the live web user interface to the database using a Flask server application.
 
-• A *'test_ClassesDAO.py'* file which is a test file for ClassesDAO.py
+• *'test_ClassesDAO.py'* and *'test_ClassesDAO.py'* files which are test files for ClassesDAO.py and BookingDAO.py
 
 <br/>
 
