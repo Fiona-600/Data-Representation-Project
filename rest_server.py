@@ -51,7 +51,6 @@ def create():
         "Max_Participants": request.json['Max_Participants'],
         "Trainer": request.json['Trainer'],
     }
-    print ("success")
     return jsonify(classesDao.create(Classes))
     
 

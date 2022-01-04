@@ -194,13 +194,14 @@
 
             function updateServer(Classes){
                $.ajax({
-                    url: "/Classes/"+Classes.Class_ID,
+                    url:"/Classes/"+Classes.Class_ID,
                     data: JSON.stringify(Classes),
                     method: "PUT",
                     dataType: "JSON",
                     contentType: "application/json; charset=utf-8",
                     success: function (result) {
-                        console.log(result)
+                        console.log("yes")
+                        //console.log(result)
                         updateTableRow(Classes)
                         showDisplay()
                         clearForm()
@@ -236,8 +237,8 @@
                 rowElement.cells[1].firstChild.textContent = Classes.Class_Name
                 rowElement.cells[2].firstChild.textContent = Classes.Day
                 rowElement.cells[3].firstChild.textContent = Classes.Time
-                rowElement.cells[3].firstChild.textContent = Classes.Max_Participants
-                rowElement.cells[3].firstChild.textContent = Classes.Trainer
+                rowElement.cells[4].firstChild.textContent = Classes.Max_Participants
+                rowElement.cells[5].firstChild.textContent = Classes.Trainer
                 console.log("updating table")
             }
 

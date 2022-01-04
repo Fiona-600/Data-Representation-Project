@@ -93,53 +93,14 @@
             <tr>
                 <td></td><td>
                     <button style = "padding: 10px 0px 10px; margin:0%; width:50%" id="create-button" onclick="doCreate()">Create a New Class</button>     
-                    <!--<button style = "padding: 10px 0px 10px; margin:0%; width:50%" id="update-button" onclick="doUpdate()">Update an Existing Class</button>-->
+                    <button style = "padding: 10px 0px 10px; margin:0%; width:50%" id="update-button" onclick="doUpdate()">Update an Existing Class</button>
                     <!--<button id="booking-button" onclick="doBooking()">Make **a Booking</button>-->
                 </td>
             </tr>
             </table>
         </div>
 
-    <!-- Create text boxes for the user - Edit Class-->
-        <div id="update" style="display:none">
-            <h2 style = "margin:120px"><b>Edit an Existing Training Class</b></h2>
-
-            <table style = "width:100%; margin:120px" id="createUpdateForm2" >
-            <tr>
-                <td> CLASS ID</td>
-                <td><input type="text" name="Class_ID" id="Class_ID"></td>
-            </tr>
-            <tr>
-                <td>CLASS NAME</td>
-                <td><input type="text" name="Class_Name"></td>
-            </tr>
-            <tr>
-                <td>DAY</td>
-                <td><input type="text" name="Day"></td>
-            </tr>
-            <tr >    
-                <td>CLASS TIME</td>
-                <td><input type="text" name="Time"></td>
-            </tr>
-            <tr> 
-                <td> MAXIMUM PARTICIPANTS</td>
-                <td><input type="int" name="Max_Participants"></td>
-            </tr>
-            <tr>   
-                <td>TRAINER</td>
-                <td><input type="text" name="Trainer"></td>
-           </tr>        
-            <tr>
-                <td></td><td>
-                    <!--<button style = "padding: 0px 0px 10px; margin:0%; width:10%" id="create-button" onclick="doCreate()">Create a Class</button>--> 
-                    <button style = "padding: 10px 0px 10px; margin:0%; width:50%" id="update-button" onclick="doUpdate()">Update an Existing Class</button>
-                    <!--<button id="booking-button" onclick="doBooking()">Make **a Booking</button>-->
-                </td>
-            </tr>
-        </table>
-        </div>
-
-
+   
         <!--Main Menu-->
         <div id="display">
             <button onClick="showCreate()">Create a Class</button>
@@ -149,12 +110,7 @@
                 <tr>
                     <th><center>CLASS ID</center></th><th><center>CLASS NAME</center></th><th><center>DAY</center></th><th><center>TIME</center></th><th><center>MAXIMUM PARTICIPANTS</center></th><th><center>TRAINER</center></th>
                 </tr>
-                <tr id="ACF1" style = "color:black">
-                <!--<tr>-->
-                    <!--<td><center>ACS1</center></td><td><center>Agility Club</center></td><td><center>Saturday</center></td><td><center>10am</center></td><td><center>15</center></td><td><center>Amy</center></td>-->
-                    <!--<td><button style = "font-size: 15px; margin:0px; width:100%" id="create-button" onclick="showUpdate(this)">Update</button></td>-->
-                    <!--<td><button style = "font-size: 15px; margin:0px; width:100%" id="create-button" onclick="doDelete(this)">Delete</button></td>-->
-                <!--</tr>-->               
+                <tr id="ACF1" style = "color:black">            
             </table>
         </div>
 
@@ -173,8 +129,8 @@
                 populateForm(Classes)
                 document.getElementById('display').style.display = "none"
                 document.getElementById('update-button').style.display = "block"
-                document.getElementById('create-button').style.display = "none"
-                //document.getElementById('create-update').style.display = "block"
+                //document.getElementById('create-button').style.display = "none"
+                document.getElementById('create-update').style.display = "block"
                 document.getElementById('update').style.display = "block"
             }
 
@@ -214,20 +170,8 @@
                 form.querySelector('input[name="Trainer"]').value = ''
                 }
 
-            function clearForm2() {
-                var form2 = document.getElementById('createUpdateForm2')
 
-                form2.querySelector('input[name="Class_ID"]').value = ''
-                form2.querySelector('input[name="Class_ID"]').disabled = false
-
-                form2.querySelector('input[name="Class_Name"]').value = ''
-                form2.querySelector('input[name="Day"]').value = ''
-                form2.querySelector('input[name="Time"]').value = ''
-                form2.querySelector('input[name="Max_Participants"]').value = ''
-                form2.querySelector('input[name="Trainer"]').value = ''
-                }
-
-            function doCreate(){
+                function doCreate(){
                 console.log("in doCreate")
                 Classes= getClassesFromForm()
                 console.log(Classes)
@@ -256,16 +200,18 @@
 
             function updateServer(Classes){
                $.ajax({
+                    //console.log("working"),
                     url: "/Classes/"+Classes.Class_ID,
                     data: JSON.stringify(Classes),
                     method: "PUT",
                     dataType: "JSON",
                     contentType: "application/json; charset=utf-8",
+                    
                     success: function (result) {
                         console.log(result)
                         updateTableRow(Classes)
                         showDisplay()
-                        clearForm2()
+                        clearForm()
                     },
                     error: function (xhr, status, error) {
                         console.log("error" + error)
@@ -315,21 +261,7 @@
                 return Classes
             }
 
-            function getClassesFromUpdateForm(){
-                var form2 = document.getElementById('createUpdateForm2')
-
-                var Classes = {}
-                Classes.Class_ID = form2.querySelector('input[name="Class_ID"]').value
-                Classes.Class_Name = form2.querySelector('input[name="Class_Name"]').value
-                Classes.Day = form2.querySelector('input[name="Day"]').value
-                Classes.Time = form2.querySelector('input[name="Time"]').value
-                Classes.Max_Participants = form2.querySelector('input[name="Max_Participants"]').value
-                Classes.Trainer = form2.querySelector('input[name="Trainer"]').value
-                console.log(Classes)
-                return Classes
-            }
-
-             function showDisplay() {
+            function showDisplay() {
                     document.getElementById('display').style.display = "block"
                     document.getElementById('create-update').style.display = "none"
                     document.getElementById('update').style.display = "none"
