@@ -13,19 +13,23 @@ def favicon():
 
 # Check Connection:
 # Test:
-# curl "http://127.0.0.1:5000/Classes" - test working
+# curl "http://127.0.0.1:5000" - test working
 @app.route('/')
 def index():
     return "hello"
-
 
 # Return all Classes:
 # Test:
 # curl "http://127.0.0.1:5000/Classes" - test working
 @app.route('/Classes')
 def getAll():
-    #print("in getall")
     return jsonify(classesDao.getAll())
+
+from BookingDao import bookingDao
+@app.route('/Booking')
+def getAll():
+    return jsonify(bookingDao.getAll())
+
 
 # Get by ID:
 #curl "http://127.0.0.1:5000/Classes/ACW1" - test working
@@ -36,7 +40,7 @@ def findById(Class_ID):
 
 # Create new class:
 # Test:
-# curl -X POST -H "Content-Type:application/json" http://127.0.0.1:5000/Classes -d "{\"Class_ID\":\"BOF\",\"Class_Name\":\"Beginners-Obedience\",\"Day\":\"Friday\", \"Time\":\"6pm\", \"Max_Participants\":10, \"Trainer\":\"Orla\"}" - test working
+# curl -X POST -H "Content-Type:application/json" http://127.0.0.1:5000/Classes -d "{\"Class_ID\":\"BOF1\",\"Class_Name\":\"Beginners-Obedience\",\"Day\":\"Friday\", \"Time\":\"6pm\", \"Max_Participants\":10, \"Trainer\":\"Orla\"}" - test working
 @app.route('/Classes', methods=['POST'])
 def create():
     
@@ -56,7 +60,7 @@ def create():
 
 # Update the database:
 # Test:
-# curl -X PUT -d "{\"Class_ID\":\"BOFI\",\"Class_Name\":\"Beginners-Obedience\",\"Day\":\"Friday\", \"Time\":\"6pm\", \"Max_Participants\":10, \"Trainer\":\"Orla\"}" -H "content-type:application/json" http://127.0.0.1:5000/Classes/BOF - test working
+# curl -X PUT -d "{\"Class_ID\":\"BOF1\",\"Class_Name\":\"Beginners-Obedience\",\"Day\":\"Friday\", \"Time\":\"6pm\", \"Max_Participants\":10, \"Trainer\":\"Orla\"}" -H "content-type:application/json" http://127.0.0.1:5000/Classes/BOF1 - test working
 @app.route('/Classes/<Class_ID>', methods=['PUT'])
 def update(Class_ID):
     foundClass = classesDao.findById(Class_ID)
@@ -90,3 +94,5 @@ def delete(Class_ID):
 
 if __name__ == '__main__' :
     app.run(debug= True)
+
+
