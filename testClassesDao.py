@@ -19,7 +19,7 @@ Class2 = {
 }
 
 Class3 = {
-    "Class_ID": "BOT1",
+    "Class_ID": "BOTU1",
     "Class_Name": "Beginners - Obedience",
     "Day": "Tuesday",
     "Time": "7pm",
@@ -28,7 +28,7 @@ Class3 = {
 }
 
 Class4 = {
-    "Class_ID": "BOT2",
+    "Class_ID": "BOTU2",
     "Class_Name": "Beginners - Obedience",
     "Day": "Tuesday",
     "Time": "8pm",
@@ -46,7 +46,7 @@ Class5 = {
 }
 
 Class6 = {
-    "Class_ID": "IOT1",
+    "Class_ID": "IOTH1",
     "Class_Name": "Improvers - Obedience",
     "Day": "Thursday",
     "Time": "7pm",
@@ -55,10 +55,10 @@ Class6 = {
 }
 
 Class7 = {
-    "Class_ID": "IOT2",
+    "Class_ID": "IOTH2",
     "Class_Name": "Improvers - Obedience",
     "Day": "Thursday",
-    "Time": "7pm",
+    "Time": "8pm",
     "Max_Participants": 10,
     "Trainer": "Dave"
 }
