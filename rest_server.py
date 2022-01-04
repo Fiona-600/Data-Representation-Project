@@ -3,7 +3,13 @@ from ClassesDao import classesDao
 import os
 from flask import send_from_directory
 
-app = Flask(__name__, static_url_path='', static_folder='static pages')
+app = Flask(__name__, static_url_path='', static_folder='staticpages')
+
+# Add favicon:
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'staticpages'),'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
 
 # Check Connection:
 # Test:

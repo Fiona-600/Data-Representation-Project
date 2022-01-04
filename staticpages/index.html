@@ -19,7 +19,7 @@
             color: white;
             padding: 8px 8px;
             margin: 50px;
-            width: 40%;
+            width: 23%;
             border-style: double;
             border-width: 10px; 
             border-color: orange;
@@ -51,7 +51,7 @@
             color: purple;
             margin: 20px;
             width:100px; 
-            text align: center;
+            text align:center;
             }
     </style>
 
@@ -60,15 +60,16 @@
         <h2><center><b>Dog Training Classes Week Commencing 10th January 2022</b></center> <h2>
     </head>       
 
-    <!-- Create tables-->
+    <!-- Create text boxes for the user-->
     <body>
             <div id="create-update" style="display:none">
-            <h2 style = "margin:120px"><b>Add a New Training Class</b></h2>
+            <h2 style = "margin:120px"><b>Add/Edit a Training Class</b></h2>
 
-            <table col style = "width:100%" id="createUpdateForm" >
+            <table style = "width:100%; margin:120px" id="createUpdateForm" >
             <tr>
                 <td> CLASS ID</td>
-                <td><input type="text" name="Class_ID" id="idInput"></td>
+                <!--<td><input type="text" name="Class_ID" id="idInput"></td>-->
+                <td><input type="text" name="Class_ID" id="Class_ID"></td>
             </tr>
             <tr>
                 <td>CLASS NAME</td>
@@ -84,7 +85,7 @@
             </tr>
             <tr> 
                 <td> MAXIMUM PARTICIPANTS</td>
-                <td><input type="int" name="Max_Particpants"></td>
+                <td><input type="int" name="Max_Participants"></td>
             </tr>
             <tr>   
                 <td>TRAINER</td>
@@ -92,7 +93,7 @@
            </tr>
             <tr>
                 <td></td><td>
-                    <button style = "margin:10%; width:80%" id="create-button" onclick="doCreate()">Create or Edit a Class</button>     
+                    <button style = "padding: 10px 0px 10px; margin:5%; width:40%" id="create-button" onclick="doCreate()">Create or Edit a Class</button>     
                     <button style = "margin:10%; width:80%" id="update-button" onclick="doUpdate()">Update an Existing Class</button>
                     <!--<button id="booking-button" onclick="doBooking()">Make **a Booking</button>-->
                 </td>
@@ -102,15 +103,18 @@
 
         <!--Main Menu-->
         <div id="display">
-            <button onClick="showCreate()">Create or Edit a Class</button>
+            <button onClick="showCreate()">Create a Class</button>
+            <button onClick="showCreate()">Edit a Class</button>
             <button onClick="makeBooking()">Make a Booking</button>     
             <table id="ClassTable" class="table" style = "width:100%; color:purple">
                 <tr>
-                    <th>CLASS ID</th><th>CLASS NAME</th><th>DAY</th><th>TIME</th><th>MAXIMUM PARTICIPANTS</th><th>TRAINER</th>
+                    <th><center>CLASS ID</center></th><th><center>CLASS NAME</center></th><th><center>DAY</center></th><th><center>TIME</center></th><th><center>MAXIMUM PARTICIPANTS</center></th><th><center>TRAINER</center></th>
                 </tr>
-            <table id="ACF1" class="table" style = "width:100%; "color:black">
+                <tr id="ACF1" style = "color:black">
                 <tr>
-                    <tr>CLASS ID</tr><tr>CLASS NAME</tr><tr>DAY</tr><tr>TIME</tr><tr>MAXIMUM PARTICIPANTS</tr><tr>TRAINER</tr>
+                    <td><center>ACS1</center></td><td><center>Agility Club</center></td><td><center>Saturday</center></td><td><center>10am</center></td><td><center>15</center></td><td><center>Amy</center></td>
+                    <!--<td><button style = "font-size: 15px; margin:0px; width:100%" id="create-button" onclick="showUpdate(this)">Update</button></td>-->
+                    <!--<td><button style = "font-size: 15px; margin:0px; width:100%" id="create-button" onclick="doDelete(this)">Delete</button></td>-->
                 </tr>               
             </table>
         </div>
@@ -141,9 +145,10 @@
                 Classes.Time = rowElement.cells[3].firstChild.textContent
                 Classes.Max_Particpants = rowElement.cells[4].firstChild.textContent
                 Classes.Trainer = rowElement.cells[5].firstChild.textContent
-                return Classes
-                
+                console.log ("working")
+                return Classes   
             }
+                        
             function populateForm(Classes){
                 var form = document.getElementById('createUpdateForm')              
                 form.querySelector('input[name="Class_ID"]').value = Classes.Class_ID
@@ -172,6 +177,7 @@
             function doCreate(){
                 console.log("in doCreate")
                 Classes= getClassesFromForm()
+                showDisplay()
                 console.log(Classes)
                 $.ajax({
                     url:"/Classes",
@@ -216,7 +222,7 @@
             }
 
             function doDelete(thisElem){
-                var tableElement = document.getElementById('ClassesTable');
+                var tableElement = document.getElementById('ClassTable');
                 var rowElement = thisElem.parentNode.parentNode;
                 var index = rowElement.rowIndex;
                 Class_ID = rowElement.getAttribute("id");
@@ -242,6 +248,7 @@
                 rowElement.cells[3].firstChild.textContent = Classes.Trainer
                 console.log("updating table")
             }
+
             function getClassesFromForm(){
                 var form = document.getElementById('createUpdateForm')
 
@@ -252,13 +259,13 @@
                 Classes.Time = form.querySelector('input[name="Time"]').value
                 Classes.Max_Participants = form.querySelector('input[name="Max_Participants"]').value
                 Classes.Trainer = form.querySelector('input[name="Trainer"]').value
-                //console.log(Classes)
-                 return Classes
+                console.log(Classes)
+                return Classes
             }
+
              function showDisplay() {
                     document.getElementById('display').style.display = "block"
                     document.getElementById('create-update').style.display = "none"
-
                 }
 
             function populateTable(){
@@ -280,10 +287,11 @@
                
             }
             function addClassesToTable(Classes){
-                //console.log("working so far")
-                tableElem = document.getElementById("ClassesTable")
+                console.log("working so far")
+                tableElem = document.getElementById("ClassTable")
+                
                 rowElem = tableElem.insertRow(-1)
-                rowElem.setAttribute("id", Classes.Class_ID)
+                rowElem.setAttribute("Class_ID", Classes.Class_ID)
                 cell1 = rowElem.insertCell(0)
                 cell1.innerHTML = Classes.Class_ID
                 cell2 = rowElem.insertCell(1)

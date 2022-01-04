@@ -170,4 +170,4 @@ With thanks to Andrew for all the helpful tips in completing this project.
 [1] Andrew Beatty Github Repository: https://github.com/andrewbeattycourseware/dataRepresenation2020
 [2] Flask Tutorial: https://www.tutorialspoint.com
 [3] w3schools Tutorials:  https://www.w3schools.com/
-
+[4] Moesif Origin & CORS Changer: https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc
