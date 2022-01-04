@@ -51,18 +51,19 @@
             color: purple;
             margin: 20px;
             width:100px; 
+            text-align:center;
             }
     </style>
 
     <!-- Create header-->
     <head>
-        <h2 style = "margin: 20px"><center><b>Dog Training Classes Week Commencing 10th January 2022</b></center> <h2>
+        <h2 style = "margin: 20px"><center><b>  Dog Training Classes Week Commencing 10th January 2022</b></center> <h2>
     </head>       
 
-    <!-- Create text boxes for the user-->
+    <!-- Create text boxes for the user - New Class-->
     <body>
-            <div id="create-update" style="display:none">
-            <h2 style = "margin:120px"><b>Add/Edit a Training Class</b></h2>
+        <div id="create-update" style="display:none">
+            <h2 style = "margin:120px"><b>Add a New Training Class</b></h2>
 
             <table style = "width:100%; margin:120px" id="createUpdateForm" >
             <tr>
@@ -88,26 +89,72 @@
             <tr>   
                 <td>TRAINER</td>
                 <td><input type="text" name="Trainer"></td>
-           </tr>
+            </tr>        
             <tr>
                 <td></td><td>
-                    <button style = "padding: 10px 0px 10px; margin:5%; width:40%" id="create-button" onclick="doCreate()">Create a Class</button>     
-                    <button style = "padding: 10px 10px 10px; margin:2%; width:45%" id="update-button" onclick="doUpdate()">Update an Existing Class</button>
+                    <button style = "padding: 10px 0px 10px; margin:0%; width:50%" id="create-button" onclick="doCreate()">Create a New Class</button>     
+                    <!--<button style = "padding: 10px 0px 10px; margin:0%; width:50%" id="update-button" onclick="doUpdate()">Update an Existing Class</button>-->
+                    <!--<button id="booking-button" onclick="doBooking()">Make **a Booking</button>-->
+                </td>
+            </tr>
+            </table>
+        </div>
+
+    <!-- Create text boxes for the user - Edit Class-->
+        <div id="update" style="display:none">
+            <h2 style = "margin:120px"><b>Edit an Existing Training Class</b></h2>
+
+            <table style = "width:100%; margin:120px" id="createUpdateForm2" >
+            <tr>
+                <td> CLASS ID</td>
+                <td><input type="text" name="Class_ID" id="Class_ID"></td>
+            </tr>
+            <tr>
+                <td>CLASS NAME</td>
+                <td><input type="text" name="Class_Name"></td>
+            </tr>
+            <tr>
+                <td>DAY</td>
+                <td><input type="text" name="Day"></td>
+            </tr>
+            <tr >    
+                <td>CLASS TIME</td>
+                <td><input type="text" name="Time"></td>
+            </tr>
+            <tr> 
+                <td> MAXIMUM PARTICIPANTS</td>
+                <td><input type="int" name="Max_Participants"></td>
+            </tr>
+            <tr>   
+                <td>TRAINER</td>
+                <td><input type="text" name="Trainer"></td>
+           </tr>        
+            <tr>
+                <td></td><td>
+                    <!--<button style = "padding: 0px 0px 10px; margin:0%; width:10%" id="create-button" onclick="doCreate()">Create a Class</button>--> 
+                    <button style = "padding: 10px 0px 10px; margin:0%; width:50%" id="update-button" onclick="doUpdate()">Update an Existing Class</button>
                     <!--<button id="booking-button" onclick="doBooking()">Make **a Booking</button>-->
                 </td>
             </tr>
         </table>
         </div>
 
+
         <!--Main Menu-->
         <div id="display">
             <button onClick="showCreate()">Create a Class</button>
+            <!--<button onClick="showUpdate()">Edit a Class</button>-->
             <button onClick="makeBooking()">Make a Booking</button>     
             <table id="ClassTable" class="table" style = "width:100%; color:purple; text-align:center">
                 <tr>
                     <th><center>CLASS ID</center></th><th><center>CLASS NAME</center></th><th><center>DAY</center></th><th><center>TIME</center></th><th><center>MAXIMUM PARTICIPANTS</center></th><th><center>TRAINER</center></th>
                 </tr>
-                <tr id="ACF1" style = "color:black">          
+                <tr id="ACF1" style = "color:black">
+                <!--<tr>-->
+                    <!--<td><center>ACS1</center></td><td><center>Agility Club</center></td><td><center>Saturday</center></td><td><center>10am</center></td><td><center>15</center></td><td><center>Amy</center></td>-->
+                    <!--<td><button style = "font-size: 15px; margin:0px; width:100%" id="create-button" onclick="showUpdate(this)">Update</button></td>-->
+                    <!--<td><button style = "font-size: 15px; margin:0px; width:100%" id="create-button" onclick="doDelete(this)">Delete</button></td>-->
+                <!--</tr>-->               
             </table>
         </div>
 
@@ -117,6 +164,7 @@
                 document.getElementById('update-button').style.display = "none"
                 document.getElementById('create-button').style.display = "block"
                 document.getElementById('create-update').style.display = "block"
+                //document.getElementById('update').style.display = "block"
             }
 
             function showUpdate(thisElem){
@@ -126,7 +174,8 @@
                 document.getElementById('display').style.display = "none"
                 document.getElementById('update-button').style.display = "block"
                 document.getElementById('create-button').style.display = "none"
-                document.getElementById('create-update').style.display = "block"
+                //document.getElementById('create-update').style.display = "block"
+                document.getElementById('update').style.display = "block"
             }
 
             function readClassFromRow(rowElement){
@@ -153,16 +202,29 @@
             }
 
             function clearForm() {
-                    var form = document.getElementById('createUpdateForm')
+                var form = document.getElementById('createUpdateForm')
 
-                    form.querySelector('input[name="Class_ID"]').value = ''
-                    form.querySelector('input[name="Class_ID"]').disabled = false
+                form.querySelector('input[name="Class_ID"]').value = ''
+                form.querySelector('input[name="Class_ID"]').disabled = false
 
-                    form.querySelector('input[name="Class_Name"]').value = ''
-                    form.querySelector('input[name="Day"]').value = ''
-                    form.querySelector('input[name="Time"]').value = ''
-                    form.querySelector('input[name="Max_Participants"]').value = ''
-                    form.querySelector('input[name="Trainer"]').value = ''
+                form.querySelector('input[name="Class_Name"]').value = ''
+                form.querySelector('input[name="Day"]').value = ''
+                form.querySelector('input[name="Time"]').value = ''
+                form.querySelector('input[name="Max_Participants"]').value = ''
+                form.querySelector('input[name="Trainer"]').value = ''
+                }
+
+            function clearForm2() {
+                var form2 = document.getElementById('createUpdateForm2')
+
+                form2.querySelector('input[name="Class_ID"]').value = ''
+                form2.querySelector('input[name="Class_ID"]').disabled = false
+
+                form2.querySelector('input[name="Class_Name"]').value = ''
+                form2.querySelector('input[name="Day"]').value = ''
+                form2.querySelector('input[name="Time"]').value = ''
+                form2.querySelector('input[name="Max_Participants"]').value = ''
+                form2.querySelector('input[name="Trainer"]').value = ''
                 }
 
             function doCreate(){
@@ -203,7 +265,7 @@
                         console.log(result)
                         updateTableRow(Classes)
                         showDisplay()
-                        clearForm()
+                        clearForm2()
                     },
                     error: function (xhr, status, error) {
                         console.log("error" + error)
@@ -212,18 +274,16 @@
             }
 
             function doDelete(thisElem){
-                console.log("working so far")
                 var tableElement = document.getElementById('ClassTable');
                 var rowElement = thisElem.parentNode.parentNode;
                 var index = rowElement.rowIndex;
-                Class_ID = rowElement.getAttribute("Class_ID");
+                Class_ID = rowElement.getAttribute("id");
                 $.ajax({
                     url:"/Classes/"+Class_ID,
                     method:"DELETE",
                     dateType:"JSON",
                     success:function(result){
                         tableElement.deleteRow(index);
-                    console.log("Success")
                     },
                     error:function(xhr,status,error){
                         console.log(error)
@@ -255,9 +315,24 @@
                 return Classes
             }
 
+            function getClassesFromUpdateForm(){
+                var form2 = document.getElementById('createUpdateForm2')
+
+                var Classes = {}
+                Classes.Class_ID = form2.querySelector('input[name="Class_ID"]').value
+                Classes.Class_Name = form2.querySelector('input[name="Class_Name"]').value
+                Classes.Day = form2.querySelector('input[name="Day"]').value
+                Classes.Time = form2.querySelector('input[name="Time"]').value
+                Classes.Max_Participants = form2.querySelector('input[name="Max_Participants"]').value
+                Classes.Trainer = form2.querySelector('input[name="Trainer"]').value
+                console.log(Classes)
+                return Classes
+            }
+
              function showDisplay() {
                     document.getElementById('display').style.display = "block"
                     document.getElementById('create-update').style.display = "none"
+                    document.getElementById('update').style.display = "none"
                 }
 
             function populateTable(){
@@ -279,7 +354,7 @@
                
             }
             function addClassesToTable(Classes){
-                //console.log("working so far")
+                console.log("working so far")
                 tableElem = document.getElementById("ClassTable")
                 
                 rowElem = tableElem.insertRow(-1)

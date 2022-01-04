@@ -19,7 +19,7 @@
             color: white;
             padding: 8px 8px;
             margin: 50px;
-            width: 40%;
+            width: 23%;
             border-style: double;
             border-width: 10px; 
             border-color: orange;
@@ -51,12 +51,13 @@
             color: purple;
             margin: 20px;
             width:100px; 
+            text align:center;
             }
     </style>
 
     <!-- Create header-->
     <head>
-        <h2 style = "margin: 20px"><center><b>Dog Training Classes Week Commencing 10th January 2022</b></center> <h2>
+        <h2><center><b>Dog Training Classes Week Commencing 10th January 2022</b></center> <h2>
     </head>       
 
     <!-- Create text boxes for the user-->
@@ -67,6 +68,7 @@
             <table style = "width:100%; margin:120px" id="createUpdateForm" >
             <tr>
                 <td> CLASS ID</td>
+                <!--<td><input type="text" name="Class_ID" id="idInput"></td>-->
                 <td><input type="text" name="Class_ID" id="Class_ID"></td>
             </tr>
             <tr>
@@ -92,7 +94,7 @@
             <tr>
                 <td></td><td>
                     <button style = "padding: 10px 0px 10px; margin:5%; width:40%" id="create-button" onclick="doCreate()">Create a Class</button>     
-                    <button style = "padding: 10px 10px 10px; margin:2%; width:45%" id="update-button" onclick="doUpdate()">Update an Existing Class</button>
+                    <button style = "margin:10%; width:80%" id="update-button" onclick="doUpdate()">Update an Existing Class</button>
                     <!--<button id="booking-button" onclick="doBooking()">Make **a Booking</button>-->
                 </td>
             </tr>
@@ -102,12 +104,18 @@
         <!--Main Menu-->
         <div id="display">
             <button onClick="showCreate()">Create a Class</button>
+            <button onClick="showUpdate()">Edit a Class</button>
             <button onClick="makeBooking()">Make a Booking</button>     
             <table id="ClassTable" class="table" style = "width:100%; color:purple; text-align:center">
                 <tr>
                     <th><center>CLASS ID</center></th><th><center>CLASS NAME</center></th><th><center>DAY</center></th><th><center>TIME</center></th><th><center>MAXIMUM PARTICIPANTS</center></th><th><center>TRAINER</center></th>
                 </tr>
-                <tr id="ACF1" style = "color:black">          
+                <tr id="ACF1" style = "color:black">
+                <!--<tr>-->
+                    <!--<td><center>ACS1</center></td><td><center>Agility Club</center></td><td><center>Saturday</center></td><td><center>10am</center></td><td><center>15</center></td><td><center>Amy</center></td>-->
+                    <!--<td><button style = "font-size: 15px; margin:0px; width:100%" id="create-button" onclick="showUpdate(this)">Update</button></td>-->
+                    <!--<td><button style = "font-size: 15px; margin:0px; width:100%" id="create-button" onclick="doDelete(this)">Delete</button></td>-->
+                <!--</tr>-->               
             </table>
         </div>
 
@@ -212,18 +220,16 @@
             }
 
             function doDelete(thisElem){
-                console.log("working so far")
                 var tableElement = document.getElementById('ClassTable');
                 var rowElement = thisElem.parentNode.parentNode;
                 var index = rowElement.rowIndex;
-                Class_ID = rowElement.getAttribute("Class_ID");
+                Class_ID = rowElement.getAttribute("id");
                 $.ajax({
                     url:"/Classes/"+Class_ID,
                     method:"DELETE",
                     dateType:"JSON",
                     success:function(result){
                         tableElement.deleteRow(index);
-                    console.log("Success")
                     },
                     error:function(xhr,status,error){
                         console.log(error)
@@ -279,7 +285,7 @@
                
             }
             function addClassesToTable(Classes){
-                //console.log("working so far")
+                console.log("working so far")
                 tableElem = document.getElementById("ClassTable")
                 
                 rowElem = tableElem.insertRow(-1)
