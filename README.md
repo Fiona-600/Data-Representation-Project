@@ -133,9 +133,9 @@ The GITHUB repository contains:
 **Activating a virtual environment using the following commands on the command line:**
 ***
 - *'python -m venv venv'* to create a blank virtual environment with a directory named venv.
-- *'.\venv\Scripts\activate.bat'* on Windows or *'source venv/bin/activate'* on Mac/Linux.
-- *'set FLASK_APP=application'* on Windows or *'export FLASK_APP=application'* on Mac/Linux to set the server environmental variable.  
-- *'export FLASK_ENV=development'* to run in a development environment.
+- *'.\venv\Scripts\activate.bat'* in Windows or *'source venv/bin/activate'* in Mac/Linux.
+- *'set FLASK_APP=application'* in Windows or *'export FLASK_APP=application'* in Mac/Linux to set the server environmental variable.  
+- 'set FLASK_ENV=development'* in Windows or *'export FLASK_ENV=development'* in Mac/Linux to run in a development environment.
 - *'flask run*' to run the server program and open the application on http://127.0.0.1:5000/. 
 - Copy the link http://127.0.0.1:5000/ into your browser or hold *'Ctrl + click on link'* to open the web page.
 - Hold *'Ctrl + c'* to stop the server running.

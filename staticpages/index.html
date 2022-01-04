@@ -50,20 +50,24 @@
             font-family: cursive;
             color: purple;
             margin: 20px;
+            width:100px; 
+            text align: center;
             }
     </style>
 
+    <!-- Create header-->
     <head>
-        <h2 style = "margin:80px"><b>Dog Training Classes Week Commencing 10th January 2022</b></h2>
+        <h2><center><b>Dog Training Classes Week Commencing 10th January 2022</b></center> <h2>
     </head>       
 
+    <!-- Create tables-->
     <body>
             <div id="create-update" style="display:none">
             <h2 style = "margin:120px"><b>Add a New Training Class</b></h2>
 
-            <table style = "margin:120px" id="createUpdateForm" >
+            <table col style = "width:100%" id="createUpdateForm" >
             <tr>
-                <td>CLASS ID</td>
+                <td> CLASS ID</td>
                 <td><input type="text" name="Class_ID" id="idInput"></td>
             </tr>
             <tr>
@@ -74,18 +78,18 @@
                 <td>DAY</td>
                 <td><input type="text" name="Day"></td>
             </tr>
-            <tr>    
+            <tr >    
                 <td>CLASS TIME</td>
                 <td><input type="text" name="Time"></td>
             </tr>
-            <tr>    
+            <tr> 
                 <td> MAXIMUM PARTICIPANTS</td>
                 <td><input type="int" name="Max_Particpants"></td>
             </tr>
-            <tr>    
+            <tr>   
                 <td>TRAINER</td>
                 <td><input type="text" name="Trainer"></td>
-            </tr>
+           </tr>
             <tr>
                 <td></td><td>
                     <button style = "margin:10%; width:80%" id="create-button" onclick="doCreate()">Create or Edit a Class</button>     
@@ -100,10 +104,14 @@
         <div id="display">
             <button onClick="showCreate()">Create or Edit a Class</button>
             <button onClick="makeBooking()">Make a Booking</button>     
-            <table id="ClassTable" class="table" style = "color:purple">
+            <table id="ClassTable" class="table" style = "width:100%; color:purple">
                 <tr>
-                    <th >CLASS ID</th><th>CLASS NAME</th><th>DAY</th><th>TIME</th><th>MAXIMUM PARTICIPANTS</th><th>TRAINER</th>
+                    <th>CLASS ID</th><th>CLASS NAME</th><th>DAY</th><th>TIME</th><th>MAXIMUM PARTICIPANTS</th><th>TRAINER</th>
                 </tr>
+            <table id="ACF1" class="table" style = "width:100%; "color:black">
+                <tr>
+                    <tr>CLASS ID</tr><tr>CLASS NAME</tr><tr>DAY</tr><tr>TIME</tr><tr>MAXIMUM PARTICIPANTS</tr><tr>TRAINER</tr>
+                </tr>               
             </table>
         </div>
 
