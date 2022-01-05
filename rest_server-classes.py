@@ -25,11 +25,6 @@ def index():
 def getAll():
     return jsonify(classesDao.getAll())
 
-from BookingDao import bookingDao
-@app.route('/Booking')
-def getAll():
-    return jsonify(bookingDao.getAll())
-
 
 # Get by ID:
 #curl "http://127.0.0.1:5000/Classes/ACW1" - test working
